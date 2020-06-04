@@ -26,7 +26,6 @@
 *.pyc
 .svn/
 *.log
-*.xcodeproj
 
 ########################
 # IDE files which should
