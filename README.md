@@ -22,6 +22,8 @@ Orbs can visualise up to 8 midi channels, with the channels 9-11 being used for 
 
 You can use the software without any need for setup, as long as there is one midi device connected or avaliable on the computer. However further changes can be made through the use of the gui or midi commands.
 
+Press 'd' to access GUI.
+
 - GUI
 	- Scatter: this toggle makes all of the orbs appear in random positions (not tied to their cell)
 	- Random Cells: this toggle re-orders the cells 
