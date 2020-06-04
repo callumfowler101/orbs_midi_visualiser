@@ -15,8 +15,8 @@ Orbs can visualise up to 8 midi channels, with the channels 9-11 being used for 
 
 **Addons**
 
-- [ofxMidi] (https://github.com/danomatika/ofxMidi)
-- [ofxDatGui] (https://github.com/braitsch/ofxDatGui)
+- [ofxMidi](https://github.com/danomatika/ofxMidi)
+- [ofxDatGui](https://github.com/braitsch/ofxDatGui)
 
 **How to Use**
 
@@ -37,5 +37,5 @@ Press 'd' to access GUI.
 	
 **Videos**
 
-- [Tutorial] ()
-- [Demonstration] ()
+- [Tutorial]()
+- [Demonstration]()
