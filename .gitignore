@@ -40,7 +40,7 @@
 *.mode2v3
 
 *.xcconfig
-*.scodeproj
+*.xcodeproj
 *.plist
 *config.make
 * Makefile
