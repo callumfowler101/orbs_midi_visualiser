@@ -38,13 +38,6 @@
 *.perspectivev3
 *.mode1v3
 *.mode2v3
-
-*.xcconfig
-*.xcodeproj
-*.plist
-*config.make
-* Makefile
-
 # XCode 4
 *.xccheckout
 xcuserdata/
