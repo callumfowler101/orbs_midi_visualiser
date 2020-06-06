@@ -28,6 +28,7 @@ Press 'd' to access GUI.
 	- Scatter: this toggle makes all of the orbs appear in random positions (not tied to their cell)
 	- Random Cells: this toggle re-orders the cells 
 	- Radomise: this button creates a new random order for the random cells
+	- Drop down menu: allows you to select your midi device
 
 - Midi Commands
 	- Sending a midi message on channels 1-8 will generate an orb in the associated cell
