@@ -171,9 +171,17 @@ void ofApp::onButtonEvent(ofxDatGuiButtonEvent e){
     }
     if(e.target == scatterTog){
         scatterOrbs=!scatterOrbs;
+        if(randomCells){
+            randomCells = false;
+            randomCellsTog->setChecked(false);
+        }
     }
     if(e.target == randomCellsTog){
         randomCells=!randomCells;
+        if(scatterOrbs){
+            scatterOrbs = false;
+            scatterTog->setChecked(false);
+        }
     }
     if(e.target == randomiseCellsBut){
         randomiseCells();
