@@ -1,6 +1,8 @@
-Orbs v0.1
+Orbs v0.2
 -----
 Orbs is a midi visualiser desgined to be used with any usb or virutal midi instrument. Currently it can only be run in the openFrameworks environment, however a standalone version will be released soon.
+
+**Update v0.2 [10/06/2020]:** Single channel mode added. This allows users with an instrument that can only output on one channel at a time to use the visualiser based on pitch. 
 
 **Overview**
 
@@ -25,16 +27,17 @@ You can use the software without any need for setup, as long as there is one mid
 Press 'd' to access GUI.
 
 - GUI
+	- Single Channel Mode: this toggle allows you to switch between single channel (pitch) or multi-channel (channel number) to influence the groups of orbs. 
 	- Scatter: this toggle makes all of the orbs appear in random positions (not tied to their cell)
 	- Random Cells: this toggle re-orders the cells 
 	- Radomise: this button creates a new random order for the random cells
 	- Drop down menu: allows you to select your midi device
 
 - Midi Commands
-	- Sending a midi message on channels 1-8 will generate an orb in the associated cell
-	- Sending a midi message on channel 9 will trigger the randomise button
-	- Sending a midi message on channel 10 will trigger the random cells toggle
-	- Sending a midi message on channel 11 will trigger the scatter toggle
+	- Sending a midi message on channels 1-8 (1-12 in single channel mode) will generate an orb in the associated cell
+	- Sending a midi message on channel 13 will trigger the randomise button
+	- Sending a midi message on channel 14 will trigger the random cells toggle
+	- Sending a midi message on channel 15 will trigger the scatter toggle
 	
 **Videos**
 

@@ -11,11 +11,11 @@ using namespace glm;
 
 class Orb {
 public:
-    void setup(int vel, int chan, vector<int> _randomCellPos);
+    void setup(int vel, int chan, vector<int> _randomCellPos, int rowLength);
     void update();
     void draw(bool scatter, bool _randomCells);
     void drawOrb(vec2 pos);
-    vec2 createRows(int _chan);
+    vec2 createRows(int _chan, int _rowLength);
     ofColor determineColor(int _chan);
     
 private:

@@ -13,7 +13,8 @@ void ofApp::setup(){
     scatterOrbs = false;
     debug = false;
     randomCells = false;
-    visualMidiChanels = 8;
+    singleChannelMode = false;
+    visualMidiChannels = 8;
     
     randomiseCells();
     setGui();
@@ -29,6 +30,7 @@ void ofApp::setMidiDevice(string midiDevice){
 //--------------------------------------------------------------
 void ofApp::update(){
     updateGui();
+    if(singleChannelMode) visualMidiChannels = 12;
     for(int i=0; i<orbs.size(); i++){
         orbs[i].update();
     }
@@ -54,15 +56,15 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::randomiseCells(){
     randomCellPos.clear();
-    int cellIdx[visualMidiChanels];
-    for(int i=0; i<visualMidiChanels; i++){
+    int cellIdx[visualMidiChannels];
+    for(int i=0; i<visualMidiChannels; i++){
         cellIdx[i] = i;
     }
-    for(int i=0; i<visualMidiChanels; i++){
-        int randomIdx = floor(ofRandom(visualMidiChanels));
+    for(int i=0; i<visualMidiChannels; i++){
+        int randomIdx = floor(ofRandom(visualMidiChannels));
         swap(cellIdx[i], cellIdx[randomIdx]);
     }
-    for(int i=0; i<visualMidiChanels; i++){
+    for(int i=0; i<visualMidiChannels; i++){
         randomCellPos.push_back(cellIdx[i]);
     }
 }
@@ -80,22 +82,23 @@ void ofApp::newMidiMessage(ofxMidiMessage &message){
     string messageString = message.toString();
     
     if(messageString.find(toFind) != std::string::npos){
-        if(message.channel < visualMidiChanels){
+        if(message.channel < visualMidiChannels){
             Orb orb;
-            orb.setup(message.velocity, message.channel, randomCellPos);
+            if(singleChannelMode) orb.setup(message.velocity, message.pitch%12, randomCellPos, 6);
+            else orb.setup(message.velocity, message.channel, randomCellPos, 4);
             orbs.push_back(orb);
         }
         else {
             switch(message.channel){
-                case 8:
+                case 12:
                     randomiseCellsBut->dispatchEvent();
                     break;
-                case 9:
+                case 13:
                     randomCellsTog->dispatchEvent();
                     if(randomCells) randomCellsTog->setChecked(true);
                     if(!randomCells) randomCellsTog->setChecked(false);
                     break;
-                case 10:
+                case 14:
                     scatterTog->dispatchEvent();
                     if(scatterOrbs) scatterTog->setChecked(true);
                     if(!scatterOrbs) scatterTog->setChecked(false);
@@ -114,19 +117,24 @@ void ofApp::setGui(){
     fps->setWidth(150, 75);
     fps->setPosition(5, 5);
     
+    singleModeTog = new ofxDatGuiToggle("Single Channel Mode", false);
+    singleModeTog->setWidth(150);
+    singleModeTog->setPosition(5, 30);
+    singleModeTog->onButtonEvent(this, &ofApp::onButtonEvent);
+    
     scatterTog = new ofxDatGuiToggle("Scatter", false);
     scatterTog->setWidth(150);
-    scatterTog->setPosition(5, 30);
+    scatterTog->setPosition(5, 55);
     scatterTog->onButtonEvent(this, &ofApp::onButtonEvent);
     
     randomCellsTog = new ofxDatGuiToggle("Random Cells", false);
     randomCellsTog->setWidth(150);
-    randomCellsTog->setPosition(5, 55);
+    randomCellsTog->setPosition(5, 80);
     randomCellsTog->onButtonEvent(this, &ofApp::onButtonEvent);
     
     randomiseCellsBut = new ofxDatGuiButton("Randomise");
     randomiseCellsBut->setWidth(150);
-    randomiseCellsBut->setPosition(5, 80);
+    randomiseCellsBut->setPosition(5, 105);
     randomiseCellsBut->onButtonEvent(this, &ofApp::onButtonEvent);
     
     vector<string> options;
@@ -135,12 +143,13 @@ void ofApp::setGui(){
     }
     midiDeviceMenu = new ofxDatGuiDropdown(midiDevices[0], options);
     midiDeviceMenu->setWidth(150);
-    midiDeviceMenu->setPosition(5, 105);
+    midiDeviceMenu->setPosition(5, 130);
     midiDeviceMenu->onDropdownEvent(this, &ofApp::onDropdownEvent);
 }
 //--------------------------------------------------------------
 void ofApp::updateGui(){
     fps->update();
+    singleModeTog->update();
     scatterTog->update();
     randomCellsTog->update();
     randomiseCellsBut->update();
@@ -149,6 +158,7 @@ void ofApp::updateGui(){
 //--------------------------------------------------------------
 void ofApp::drawGui(){
     fps->draw();
+    singleModeTog->draw();
     scatterTog->draw();
     randomCellsTog->draw();
     randomiseCellsBut->draw();
@@ -156,6 +166,9 @@ void ofApp::drawGui(){
 }
 //--------------------------------------------------------------
 void ofApp::onButtonEvent(ofxDatGuiButtonEvent e){
+    if(e.target == singleModeTog){
+        singleChannelMode=!singleChannelMode;
+    }
     if(e.target == scatterTog){
         scatterOrbs=!scatterOrbs;
     }

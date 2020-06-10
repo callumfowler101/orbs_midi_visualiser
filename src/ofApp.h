@@ -25,12 +25,13 @@ class ofApp : public ofBaseApp, public ofxMidiListener {
     
         ofxMidiIn midi;
         vector <Orb> orbs;
-        bool scatterOrbs, debug, randomCells;
-        int visualMidiChanels;
+        bool scatterOrbs, debug, randomCells, singleChannelMode;
+        int visualMidiChannels;
         vector<int> randomCellPos;
         vector<string> midiDevices;
     
         //Parameters
+        ofxDatGuiToggle* singleModeTog;
         ofxDatGuiToggle* scatterTog;
         ofxDatGuiToggle* randomCellsTog;
         ofxDatGuiButton* randomiseCellsBut;

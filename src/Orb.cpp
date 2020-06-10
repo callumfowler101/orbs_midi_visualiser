@@ -6,28 +6,28 @@
 //
 
 #include "Orb.h"
-void Orb::setup(int vel, int chan, vector<int> _randomCellPos){
-    //chan-=1;
+void Orb::setup(int vel, int chan, vector<int> _randomCellPos, int rowLength){
     outerAlpha = 255;
     
     if(vel>0) innerAlpha = ofMap(vel, 0, 127, 100, 255, true);
     else innerAlpha = 0;
     
     randPos = vec2(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()));
-    groupRandPos = createRows(_randomCellPos[chan]);
-    groupPos = createRows(chan);
+    groupRandPos = createRows(_randomCellPos[chan], rowLength);
+    groupPos = createRows(chan, rowLength);
     
     
     size = int(ofRandom(25,45));
     color = determineColor(chan);
 }
-vec2 Orb::createRows(int _chan){
+
+vec2 Orb::createRows(int _chan, int _rowLength){
     vec2 position, rowOffset;
-    if(_chan<4) rowOffset = vec2(0, ofGetHeight()*0.5);
+    if(_chan<_rowLength) rowOffset = vec2(0, ofGetHeight()*0.5);
     else rowOffset = vec2(ofGetHeight()*0.5, ofGetHeight());
     
-    int modChan = _chan%4;
-    float groupX = ofMap(modChan, 0, 4, 0, ofGetWidth())+(150+ofRandom(-125,125));
+    int modChan = _chan%_rowLength;
+    float groupX = ofMap(modChan, 0, _rowLength, 0, ofGetWidth())+(150+ofRandom(-125,125));
     position = vec2(groupX, ofRandom(rowOffset.x, rowOffset.y));
     return position;
 }
@@ -78,7 +78,20 @@ ofColor Orb::determineColor(int _chan){
         case 7:
             _color = ofColor(128, 204, 255);
             break;
+        case 8:
+            _color = ofColor(200, 120, 180);
+            break;
+        case 9:
+            _color = ofColor(80, 190, 120);
+            break;
+        case 10:
+            _color = ofColor(0, 200, 220);
+            break;
+        case 11:
+            _color = ofColor(175, 220, 180);
+            break;
         default:
+            _color - ofColor(255);
             break;
     }
     return _color;
