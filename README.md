@@ -6,7 +6,7 @@ Orbs is a midi visualiser desgined to be used with any usb or virutal midi instr
 
 **Overview**
 
-Orbs can visualise up to 8 midi channels, with the channels 9-11 being used for control. Each channel has it's own cell in a 4x2 grid, with it's own colour.  Currently channels 12-16 are not used for anything. 
+Orbs can visualise up to 8 midi channels or 12 pitch values (depending on channel mode). Channels 13-15 are used for control. Each channel has it's own cell in a 4x2 (or 6x2) grid, with it's own colour. 
 
 **Installation**
 
