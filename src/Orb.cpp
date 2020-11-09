@@ -20,7 +20,7 @@ void Orb::setup(int vel, int chan, vector<int> _randomCellPos, int rowLength){
     size = int(ofRandom(25,45));
     color = determineColor(chan);
 }
-
+//--------------------------------------------------------------
 vec2 Orb::createRows(int _chan, int _rowLength){
     vec2 position, rowOffset;
     if(_chan<_rowLength) rowOffset = vec2(0, ofGetHeight()*0.5);
@@ -31,26 +31,25 @@ vec2 Orb::createRows(int _chan, int _rowLength){
     position = vec2(groupX, ofRandom(rowOffset.x, rowOffset.y));
     return position;
 }
-
-
+//--------------------------------------------------------------
 void Orb::update(){
     innerAlpha-=ofRandom(5);
     outerAlpha-=ofRandom(3);
 }
-
+//--------------------------------------------------------------
 void Orb::draw(bool scatter, bool _randomCells){
     if(scatter) drawOrb(randPos);
     else if(_randomCells) drawOrb(groupRandPos);
     else drawOrb(groupPos);
 }
-
+//--------------------------------------------------------------
 void Orb::drawOrb(vec2 pos){
     ofSetColor(color,outerAlpha);
     ofDrawCircle(pos, size);
     ofSetColor(0,innerAlpha);
     ofDrawCircle(pos, size*0.9);
 }
-
+//--------------------------------------------------------------
 ofColor Orb::determineColor(int _chan){
     ofColor _color;
     switch(_chan){
