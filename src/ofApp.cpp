@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup(){    
     ofSetWindowPosition(0, 0);
     ofBackground(0);
     ofSetCircleResolution(64);
